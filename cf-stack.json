@@ -1,3 +1,3 @@
-template-file-path: cf-stack.json
+template-file-path: infra/pkm-stack.json
 parameters: {}
 tags: {}
