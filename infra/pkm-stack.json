@@ -9,7 +9,7 @@
         "MyBucket": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
-                "BucketName": "test-bucket"
+                "BucketName": "test-bucket-1018cvn0y8t"
             }
         }
     },
