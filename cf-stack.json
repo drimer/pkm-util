@@ -1,11 +1,26 @@
 {
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Resources": {
-        "MyBucket": {
-            "Type": "AWS::S3::Bucket",
-            "Properties": {
-                "BucketName": "test-bucket"
-            }
-        }
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Description" : "CloudFormation template for pkm-util",
+  "Metadata" : {
+  },
+  "Parameters" : {
+  },
+  "Rules" : {
+  },
+  "Mappings" : {
+  },
+  "Conditions" : {
+  },
+  "Transform" : {
+  },
+  "Resources" : {
+    "MyBucket": {
+      "Type": "AWS::S3::Bucket",
+        "Properties": {
+          "BucketName": "test-bucket"
+      }
     }
+  },
+  "Outputs" : {
+  }
 }
