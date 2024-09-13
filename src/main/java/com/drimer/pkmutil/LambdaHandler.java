@@ -1,7 +1,7 @@
 package com.drimer.pkmutil;
 
-import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
+import com.amazonaws.serverless.proxy.model.HttpApiV2ProxyRequest;
 import com.amazonaws.serverless.proxy.spring.SpringBootLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
@@ -10,11 +10,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class LambdaHandler implements RequestStreamHandler {
-  private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+  private static SpringBootLambdaContainerHandler<HttpApiV2ProxyRequest, AwsProxyResponse> handler;
 
   static {
     try {
-      handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(PkmutilApplication.class);
+      handler = SpringBootLambdaContainerHandler.getHttpApiV2ProxyHandler(PkmutilApplication.class);
     } catch (Exception e) {
       e.printStackTrace();
       throw new RuntimeException("Could not initialize Spring Boot application", e);
