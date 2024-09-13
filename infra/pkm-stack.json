@@ -1,17 +1,67 @@
 {
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "CloudFormation template for pkm-util",
-    "Metadata": {},
-    "Parameters": {},
-    "Rules": {},
-    "Conditions": {},
-    "Resources": {
-        "MyBucket": {
-            "Type": "AWS::S3::Bucket",
-            "Properties": {
-                "BucketName": "test-bucket-1018cvn0y8t"
-            }
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "CloudFormation template for pkm-util",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Conditions": {},
+  "Resources": {
+    "PokemonApiLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Handler": "com.drimer.pkmutil.LambdaHandler::handleRequest",
+        "Runtime": "java21",
+        "Architectures": [
+          "x86_64"
+        ],
+        "MemorySize": 2048,
+        "SnapStart": {
+          "ApplyOn": "PublishedVersions"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaExecutionRole",
+            "Arn"
+          ]
         }
+      }
     },
-    "Outputs": {}
+    "LambdaExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "LambdaExecutionPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {}
 }
